@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Registro</title>
+</head>
+<body>
+    <section id="componente">
+        <header>
+            <h1>Mi lista de peliculas</h1>
+        </header>
+
+        <hr>
+        <article>
+            <h3>Selecciona una Pelicula</h3>
+            <input type="text" v-model="busqueda" placeholder="Buscar Pelicula...">
+        </article>
+
+
+            <ul>
+                <li v-for="(pelicula) in filtradas" :key="pelicula.id" @click="seleccionar(pelicula)">
+                   {{ pelicula.nombre }}
+                </li>
+            </ul>
+        
+        <hr>
+          <button @click="formulario = true">Agrega una Nueva Pelicula</button>
+
+          <article v-if="seleccion">
+            <div>
+            <h3>{{ seleccion.nombre }}</h3>
+            <p><strong>Director: </strong>{{ seleccion.director }}</p>
+            <p>{{ seleccion.categoria }}</p>
+            <h3>Sinopsis:</h3>
+            <ul>
+                <li v-for="(sin, index) in seleccion.sinopsis" :key="index">
+                    {{ sin }}
+                </li>
+            </ul>
+            </div>
+          </article>
+
+          <article v-if="formulario">
+            <h4>Nueva Pelicuala</h4>
+            <input type="text" v-model="nuevaPelicula.nombre" placeholder="Nombre de la Pelicula">
+            <textarea v-model="nuevaPelicula.categoria" placeholder="Categoria"></textarea>
+            <input type="text" v-model="nuevaPelicula.director" placeholder="Director">
+
+            <div>
+                <input type="text" v-model="sinopsisT" placeholder="Sinopsis">
+                <button @click="agregarSinopsis">Agregar Sinopsis</button>
+            </div>
+
+            <ul>
+                <li v-for="(sin, i) in nuevaPelicula.sinopsis" :key="i">
+                    {{ sin }}
+                </li>
+            </ul>
+
+            <button @click="guardarPelicula">Guardar Pelicula</button>
+            <button @click="cancelarFormulario">Cancelar</button>
+
+          </article>
+
+
+    </section>
+    
+
+    <script src="../js/Vuejs.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
